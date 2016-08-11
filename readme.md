@@ -1,7 +1,7 @@
-# css-declarations [![Build Status][build-badge]][build-page] [![Coverage Status][coverage-badge]][coverage-page]
+# css-declarations [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-Parse and stringify CSS declarations.
-For example, an HTML `style` attribute.
+Parse and stringify CSS declarations (such as the HTML `style`
+attribute).
 
 ## Installation
 
@@ -10,9 +10,6 @@ For example, an HTML `style` attribute.
 ```bash
 npm install css-declarations
 ```
-
-**css-declarations** is also available as an AMD, CommonJS, and
-globals module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -26,7 +23,7 @@ Parsing:
 
 ```javascript
 var values = cssDeclarations.parse(
-    'color:/*red*/purple; -webkit-border-radius: 3px !important;;'
+  'color:/*red*/purple; -webkit-border-radius: 3px !important;;'
 );
 ```
 
@@ -54,49 +51,51 @@ Yields:
 
 Parse CSS declarations from `string` to `object`.
 
-*   `value` (`string`) — Comma-separated tokens;
+###### `options`
 
-*   `options` (`Object`, optional):
+*   `warning` ([`Function`][warning])
+    — When given, `warning` is invoked when an error is encountered.
 
-    *   `warning` ([`Function`][warning])
-        — When given, `warning` is invoked when an error is encountered.
+###### Returns
 
-**Returns**: `Object.<string, string>` — Declarations.
-
-### `function warning(reason, offset)`
-
-Invoked when an error occurs. Errors originate from [`reworkcss/css`][css].
-
-**Parameters**:
-
-*   `reason` (`string`) — English reason for failure;
-*   `offset` (`number`) — Index-based position of error.
+`Object.<string>` — Declarations.
 
 ### `cssDeclarations.stringify(values)`
 
 Compile CSS declarations from `object` to `string`.
 
-*   `values` (`Object<string, string>`) — Declarations.
+###### Parameters
 
-**Returns**: `string` — Comma-separated tokens.
+*   `values` (`Object<string>`) — Declarations.
+
+###### Returns
+
+`string` — Stringified declarations.
+
+### `function warning(reason, offset)`
+
+Invoked when an error occurs. Errors come from [`reworkcss/css`][css].
+
+###### Parameters
+
+*   `reason` (`string`) — English reason for failure;
+*   `offset` (`number`) — Index-based position of error.
 
 ## License
 
 [MIT][license] © [Titus Wormer][author]
 
-<!-- Definition -->
+<!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/css-declarations.svg
+[travis-badge]: https://img.shields.io/travis/wooorm/css-declarations.svg
 
-[build-page]: https://travis-ci.org/wooorm/css-declarations
+[travis]: https://travis-ci.org/wooorm/css-declarations
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/css-declarations.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/css-declarations.svg
 
-[coverage-page]: https://codecov.io/github/wooorm/css-declarations?branch=master
+[codecov]: https://codecov.io/github/wooorm/css-declarations
 
 [npm]: https://docs.npmjs.com/cli/install
-
-[releases]: https://github.com/wooorm/css-declarations/releases
 
 [license]: LICENSE
 
