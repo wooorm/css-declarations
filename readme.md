@@ -74,7 +74,7 @@ Compile CSS declarations from `object` to `string`.
 
 ### `function warning(reason, offset)`
 
-Invoked when an error occurs. Errors come from [`reworkcss/css`][css].
+Invoked when an error occurs.  Errors come from [`reworkcss/css`][css].
 
 ###### Parameters
 
