@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module css-declarations
- * @fileoverview Parse and stringify CSS declarations.
- */
-
 'use strict';
 
 /* Dependencies. */

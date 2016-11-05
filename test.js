@@ -1,11 +1,3 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module css-declarations
- * @fileoverview Test suite for `css-declarations`.
- */
-
 'use strict';
 
 /* Dependencies. */
