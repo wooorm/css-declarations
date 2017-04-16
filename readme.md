@@ -13,36 +13,17 @@ npm install css-declarations
 
 ## Usage
 
-Dependencies:
-
 ```javascript
 var cssDeclarations = require('css-declarations');
-```
 
-Parsing:
+var values = cssDeclarations.parse(`
+  color:/*red*/purple;
+  -webkit-border-radius: 3px !important;;
+`);
+//=> {color: 'purple', webkitBorderRadius: '3px !important'}
 
-```javascript
-var values = cssDeclarations.parse(
-  'color:/*red*/purple; -webkit-border-radius: 3px !important;;'
-);
-```
-
-Yields:
-
-```js
-{ color: 'purple', webkitBorderRadius: '3px !important' }
-```
-
-Compiling:
-
-```javascript
 var value = cssDeclarations.stringify(values);
-```
-
-Yields:
-
-```js
-'color: purple; -webkit-border-radius: 3px !important;'
+//=> 'color: purple; -webkit-border-radius: 3px !important;'
 ```
 
 ## API
@@ -64,10 +45,6 @@ Parse CSS declarations from `string` to `object`.
 
 Compile CSS declarations from `object` to `string`.
 
-###### Parameters
-
-*   `values` (`Object<string>`) — Declarations.
-
 ###### Returns
 
 `string` — Stringified declarations.
@@ -78,7 +55,7 @@ Invoked when an error occurs.  Errors come from [`reworkcss/css`][css].
 
 ###### Parameters
 
-*   `reason` (`string`) — English reason for failure;
+*   `reason` (`string`) — English reason for error;
 *   `offset` (`number`) — Index-based position of error.
 
 ## License
