@@ -1,10 +1,8 @@
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var cssDeclarations = require('./index.js');
 
-/* Tests. */
 test('css-declarations', function (t) {
   t.equal(
     typeof cssDeclarations,

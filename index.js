@@ -1,13 +1,11 @@
 'use strict';
 
-/* Dependencies. */
 var css = require('css');
 var paramCase = require('param-case');
 var camelCase = require('camelcase');
 var locations = require('vfile-location');
 var vendors = require('vendors');
 
-/* Expose. */
 exports.parse = parse;
 exports.stringify = stringify;
 
@@ -28,15 +26,7 @@ var SUFFIX = '}';
 /* Configuration for `reworkcss/css`. */
 var CSS_OPTIONS = {silent: true};
 
-/**
- * Parse CSS declarations to an object.
- *
- * @param {string} value - Declarations as string.
- * @param {Object} [options] - Configuration.
- * @param {Function} [options.warning] - Invoked when
- *   errors occur.
- * @return {Object} - Declarations as object.
- */
+/* Parse CSS declarations to an object. */
 function parse(value, options) {
   var input = String(value || EMPTY);
   var max = input.length;
@@ -87,12 +77,7 @@ function parse(value, options) {
   return declarations;
 }
 
-/**
- * Compile a declarations object to string.
- *
- * @param {Object} values - Declarations as object.
- * @return {string} - Declarations as string.
- */
+/* Compile a declarations object to string. */
 function stringify(values) {
   var results = [];
   var key;
@@ -111,12 +96,7 @@ function stringify(values) {
   return value ? value + C_SEMI_COLON : EMPTY;
 }
 
-/**
- * Transform `cssName` to `javaScriptName`.
- *
- * @param {string} cssName - Dash-cased name.
- * @return {string} - Camel-cased name.
- */
+/* Transform `cssName` to `javaScriptName`. */
 function toJavaScriptName(cssName) {
   var char = cssName.charAt(0);
 
@@ -125,12 +105,7 @@ function toJavaScriptName(cssName) {
   ));
 }
 
-/**
- * Transform `javaScriptName` to `cssName`.
- *
- * @param {string} javaScriptName - Camel-cased name.
- * @return {string} - Dash-cased name.
- */
+/* Transform `javaScriptName` to `cssName`. */
 function toCSSName(javaScriptName) {
   var cssName = paramCase(javaScriptName);
   var pos = cssName.indexOf(C_DASH);
