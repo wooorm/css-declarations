@@ -23,7 +23,7 @@
     "index.js"
   ],
   "dependencies": {
-    "camelcase": "^3.0.0",
+    "camelcase": "^4.0.0",
     "css": "^2.2.1",
     "param-case": "^2.1.0",
     "vendors": "^1.0.0",
