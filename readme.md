@@ -14,16 +14,16 @@ npm install css-declarations
 ## Usage
 
 ```javascript
-var cssDeclarations = require('css-declarations');
+var cssDeclarations = require('css-declarations')
 
 var values = cssDeclarations.parse(`
   color:/*red*/purple;
   -webkit-border-radius: 3px !important;;
-`);
-//=> {color: 'purple', webkitBorderRadius: '3px !important'}
+`)
+// => {color: 'purple', webkitBorderRadius: '3px !important'}
 
-var value = cssDeclarations.stringify(values);
-//=> 'color: purple; -webkit-border-radius: 3px !important;'
+cssDeclarations.stringify(values)
+// => 'color: purple; -webkit-border-radius: 3px !important;'
 ```
 
 ## API
