@@ -5,3 +5,4 @@ coverage/
 node_modules/
 css-declarations.js
 css-declarations.min.js
+yarn.lock
