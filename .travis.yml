@@ -4,19 +4,12 @@ node_js:
 - '8.0'
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
-  - provider: npm
-    email: tituswormer@gmail.com
-    api_key:
-      secure: m2q4nOyGtH5HednGQ+MV2PbykkqM18Lf0Ju+QunqouttHQwxlDQiIWBho62MOYqt9IBGLku6zkcC9ZgiC/OiKqCrFmfqgDx9rUrDreIprXPxS96Jysw6JnAAZ3a/0BD4/5Dt2PKd0VA6U4A8RgscJJz2UTkENsjQfCSeshUHQXvnH6LvwbLi233QrSugE/8GeGUYe+AcGEOReaP/epLZ6GZWeN9myhjRGNSTnG2W6XWcVCg5G07hJBsqIPor3XI5UIn42x+zVznrHapvOY68NjNb/5QvVOkj/STsfhpkWQnz8VuCWxXRa8FdcVf6dkziDSmvBPCcLrxFx9k6ceiybLyCGRw2kXRe14x3OctUSRm3eUK28ZRaNYPwgkjyYvE6j+DpO6y5cUGSKCGv4yMVMu7s5fHBAsFerJpcWgNbBFT1v5uygJ4VgdKxL9WOtg59Zf0ZKnOtQfxY7+w76UVUzgAjZJdEDh9+Z0ZwU+DA1vtpEoIn4GdsKcRiIJUxgQFHVQZJ7LRMmh9PJpWnvx+tAtVpvZqKd2khXhhqM/2usXyFyU3HTjRli4/jzrXD51e3kxS11dtEL9kv+tKAH6H6tzjFSxmZsmtfyOdXG2lt2ZoGAf/i7gP2ZYtFXP3doUlNjaE9/2ZGYChIdFyzGmmfYljSkXQZL8cXibGHtaH+iJA=
-    on:
-      tags: true
-      node: '4.0'
-  - provider: releases
-    api_key:
-      secure: MEXy1Zs+XtALW0Mh1T3AenBHIoP7DeUt9IacEp5GbCC+LSCy9w/zftSonInHPb9O/ITLrZbLVJthG8UjLXfaGmvbLmQDtKw1gzNlBLc9JvVxGl55S3EADqeD54eK1cGkAOJ8Lx6s3V3Rt5rPO+0YZpkxPbx8aQ7As42LSrEGI6L0WS3iVUNaC6l/1vOohrSo+SCt0iBnU7W5CEuX3Cn3yTSOCHw5VTqm2i0mQNw6WbdVdO74qqXewbQopyb1QYwIySf517Sgwa9zcRo3Q48MkqlgCo2+lMksuUER0YE2S+O6pGzUN/oD3P5YqWTnVV6FpzZmjO/QkDl7JCCzpDOaBMuDWDKWdE0TtqsTXb6/RlVeDby63ET7plWpiBTQ3sijCluggg7Am8rvEY50gAoYq38TvF53xS9TRB7hf5fyhxHLF/sz9OLAZVPoFea0cRJyxmOguhFcTrjOXXZXm8Ee10oDNrZby5j5y3GhF9z758naV+fcOQHNjG+jjqkOgKidPSE+6nCpja571faTTEghhey0PW3igcLu+OC5Q5lt+Y5v3MWkZ3SMPy5wmQuBa0TbbChqKrZEKCmuU127sQ/ex6sJtu5SFSCvLOK11fhnnqfOFLCxAipn3zs0MsNbiKw1/JNM95VzJKlrTIVIlRM2Att8VcLbWOfaCkQDi2lv2Ok=
-    file:
-      - "css-declarations.js"
-      - "css-declarations.min.js"
-    on:
-      tags: true
-      node: '8.0'
+  provider: releases
+  api_key:
+    secure: MEXy1Zs+XtALW0Mh1T3AenBHIoP7DeUt9IacEp5GbCC+LSCy9w/zftSonInHPb9O/ITLrZbLVJthG8UjLXfaGmvbLmQDtKw1gzNlBLc9JvVxGl55S3EADqeD54eK1cGkAOJ8Lx6s3V3Rt5rPO+0YZpkxPbx8aQ7As42LSrEGI6L0WS3iVUNaC6l/1vOohrSo+SCt0iBnU7W5CEuX3Cn3yTSOCHw5VTqm2i0mQNw6WbdVdO74qqXewbQopyb1QYwIySf517Sgwa9zcRo3Q48MkqlgCo2+lMksuUER0YE2S+O6pGzUN/oD3P5YqWTnVV6FpzZmjO/QkDl7JCCzpDOaBMuDWDKWdE0TtqsTXb6/RlVeDby63ET7plWpiBTQ3sijCluggg7Am8rvEY50gAoYq38TvF53xS9TRB7hf5fyhxHLF/sz9OLAZVPoFea0cRJyxmOguhFcTrjOXXZXm8Ee10oDNrZby5j5y3GhF9z758naV+fcOQHNjG+jjqkOgKidPSE+6nCpja571faTTEghhey0PW3igcLu+OC5Q5lt+Y5v3MWkZ3SMPy5wmQuBa0TbbChqKrZEKCmuU127sQ/ex6sJtu5SFSCvLOK11fhnnqfOFLCxAipn3zs0MsNbiKw1/JNM95VzJKlrTIVIlRM2Att8VcLbWOfaCkQDi2lv2Ok=
+  file:
+    - "css-declarations.js"
+    - "css-declarations.min.js"
+  on:
+    tags: true
+    node: '8.0'
