@@ -1,8 +1,6 @@
 'use strict';
 
 var css = require('css');
-var paramCase = require('param-case');
-var camelCase = require('camelcase');
 var locations = require('vfile-location');
 var vendors = require('vendors');
 
@@ -100,14 +98,14 @@ function stringify(values) {
 function toJavaScriptName(cssName) {
   var char = cssName.charAt(0);
 
-  return camelCase(cssName.slice(
+  return camel(cssName.slice(
     char === C_DASH || char === C_UNDERSCORE ? 1 : 0
   ));
 }
 
 /* Transform `javaScriptName` to `cssName`. */
 function toCSSName(javaScriptName) {
-  var cssName = paramCase(javaScriptName);
+  var cssName = param(javaScriptName);
   var pos = cssName.indexOf(C_DASH);
   var subvalue = pos === -1 ? null : cssName.slice(0, pos);
 
@@ -116,4 +114,18 @@ function toCSSName(javaScriptName) {
   }
 
   return cssName;
+}
+
+function camel(val) {
+  return val.replace(/-./g, replacer);
+  function replacer($0) {
+    return $0.charAt(1).toUpperCase();
+  }
+}
+
+function param(val) {
+  return val.replace(/[A-Z]/g, replacer);
+  function replacer($0) {
+    return '-' + $0.toLowerCase();
+  }
 }
