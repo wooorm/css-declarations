@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var cssDeclarations = require('./index.js');
+var cssDeclarations = require('.');
 
 test('css-declarations', function (t) {
   t.equal(
