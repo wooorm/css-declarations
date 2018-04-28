@@ -13,7 +13,7 @@
     "parse",
     "stringify"
   ],
-  "repository": "https://github.com/wooorm/css-declarations",
+  "repository": "wooorm/css-declarations",
   "bugs": "https://github.com/wooorm/css-declarations/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
