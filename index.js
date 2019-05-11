@@ -7,26 +7,30 @@ var vendors = require('vendors')
 exports.parse = parse
 exports.stringify = stringify
 
-// Constants.
-var EMPTY = ''
-
 // Characters.
-var C_SPACE = ' '
-var C_DASH = '-'
-var C_UNDERSCORE = '_'
-var C_SEMI_COLON = ';'
-var C_COLON = ':'
+var space = ' '
+var dash = '-'
+var colon = ':'
+var semicolon = ';'
+var underscore = '_'
+var lowercaseI = 'i'
+var leftCurlyBrace = '{'
+var rightCurlyBrace = '}'
+
+// Expressions.
+var uppercaseRe = /[A-Z]/g
+var breakRe = /-./g
 
 // Suffix to wrap around declarations.
-var PREFIX = 'i{'
-var SUFFIX = '}'
+var declarationsPrefix = lowercaseI + leftCurlyBrace
+var declarationsSuffix = rightCurlyBrace
 
 // Configuration for `reworkcss/css`.
-var CSS_OPTIONS = {silent: true}
+var cssOption = {silent: true}
 
 // Parse CSS declarations to an object.
 function parse(value, options) {
-  var input = String(value || EMPTY)
+  var input = String(value || '')
   var max = input.length
   var declarations = {}
   var settings = options || {}
@@ -41,10 +45,10 @@ function parse(value, options) {
   var warning
   var offset
 
-  input = PREFIX + input + SUFFIX
+  input = declarationsPrefix + input + declarationsSuffix
   location = locations(input)
 
-  sheet = css.parse(input, CSS_OPTIONS).stylesheet
+  sheet = css.parse(input, cssOption).stylesheet
   results = sheet.rules[0].declarations || []
   warnings = sheet.parsingErrors
 
@@ -69,7 +73,7 @@ function parse(value, options) {
       location.toOffset({
         line: warning.line,
         column: warning.column
-      }) - PREFIX.length
+      }) - declarationsPrefix.length
     )
 
     warn(warning.reason, offset)
@@ -88,45 +92,45 @@ function stringify(values) {
     value = values[key]
 
     if (value !== null && value !== undefined) {
-      results.push([toCSSName(key), value].join(C_COLON + C_SPACE))
+      results.push([toCSSName(key), value].join(colon + space))
     }
   }
 
-  value = results.join(C_SEMI_COLON + C_SPACE)
+  value = results.join(semicolon + space)
 
-  return value ? value + C_SEMI_COLON : EMPTY
+  return value ? value + semicolon : ''
 }
 
 // Transform `cssName` to `javaScriptName`.
 function toJavaScriptName(cssName) {
   var char = cssName.charAt(0)
 
-  return camel(cssName.slice(char === C_DASH || char === C_UNDERSCORE ? 1 : 0))
+  return camel(cssName.slice(char === dash || char === underscore ? 1 : 0))
 }
 
 // Transform `javaScriptName` to `cssName`.
 function toCSSName(javaScriptName) {
   var cssName = param(javaScriptName)
-  var pos = cssName.indexOf(C_DASH)
+  var pos = cssName.indexOf(dash)
   var subvalue = pos === -1 ? null : cssName.slice(0, pos)
 
   if (subvalue && vendors.indexOf(subvalue) !== -1) {
-    cssName = C_DASH + cssName
+    cssName = dash + cssName
   }
 
   return cssName
 }
 
 function camel(val) {
-  return val.replace(/-./g, replacer)
+  return val.replace(breakRe, replacer)
   function replacer($0) {
     return $0.charAt(1).toUpperCase()
   }
 }
 
 function param(val) {
-  return val.replace(/[A-Z]/g, replacer)
+  return val.replace(uppercaseRe, replacer)
   function replacer($0) {
-    return '-' + $0.toLowerCase()
+    return dash + $0.toLowerCase()
   }
 }
