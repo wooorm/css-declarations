@@ -74,7 +74,7 @@ Invoked when an error occurs.  Errors come from [`reworkcss/css`][css].
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
 
