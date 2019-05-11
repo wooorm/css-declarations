@@ -38,7 +38,7 @@
     "xo": "^0.20.0"
   },
   "scripts": {
-    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
     "build-bundle": "browserify index.js -s cssDeclarations > css-declarations.js",
     "build-mangle": "esmangle css-declarations.js > css-declarations.min.js",
     "build": "npm run build-bundle && npm run build-mangle",
