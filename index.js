@@ -7,24 +7,24 @@ var vendors = require('vendors')
 exports.parse = parse
 exports.stringify = stringify
 
-/* Constants. */
+// Constants.
 var EMPTY = ''
 
-/* Characters. */
+// Characters.
 var C_SPACE = ' '
 var C_DASH = '-'
 var C_UNDERSCORE = '_'
 var C_SEMI_COLON = ';'
 var C_COLON = ':'
 
-/* Suffix to wrap around declarations. */
+// Suffix to wrap around declarations.
 var PREFIX = 'i{'
 var SUFFIX = '}'
 
-/* Configuration for `reworkcss/css`. */
+// Configuration for `reworkcss/css`.
 var CSS_OPTIONS = {silent: true}
 
-/* Parse CSS declarations to an object. */
+// Parse CSS declarations to an object.
 function parse(value, options) {
   var input = String(value || EMPTY)
   var max = input.length
@@ -78,7 +78,7 @@ function parse(value, options) {
   return declarations
 }
 
-/* Compile a declarations object to string. */
+// Compile a declarations object to string.
 function stringify(values) {
   var results = []
   var key
@@ -97,14 +97,14 @@ function stringify(values) {
   return value ? value + C_SEMI_COLON : EMPTY
 }
 
-/* Transform `cssName` to `javaScriptName`. */
+// Transform `cssName` to `javaScriptName`.
 function toJavaScriptName(cssName) {
   var char = cssName.charAt(0)
 
   return camel(cssName.slice(char === C_DASH || char === C_UNDERSCORE ? 1 : 0))
 }
 
-/* Transform `javaScriptName` to `cssName`. */
+// Transform `javaScriptName` to `cssName`.
 function toCSSName(javaScriptName) {
   var cssName = param(javaScriptName)
   var pos = cssName.indexOf(C_DASH)
