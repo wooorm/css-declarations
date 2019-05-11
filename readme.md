@@ -1,4 +1,9 @@
-# css-declarations [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# css-declarations
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 Parse and stringify CSS declarations (such as the HTML `style`
 attribute).
@@ -64,13 +69,21 @@ Invoked when an error occurs.  Errors come from [`reworkcss/css`][css].
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/css-declarations.svg
+[build-badge]: https://img.shields.io/travis/wooorm/css-declarations.svg
 
-[travis]: https://travis-ci.org/wooorm/css-declarations
+[build]: https://travis-ci.org/wooorm/css-declarations
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/css-declarations.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/css-declarations.svg
 
-[codecov]: https://codecov.io/github/wooorm/css-declarations
+[coverage]: https://codecov.io/github/wooorm/css-declarations
+
+[downloads-badge]: https://img.shields.io/npm/dm/css-declarations.svg
+
+[downloads]: https://www.npmjs.com/package/css-declarations
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/css-declarations.svg
+
+[size]: https://bundlephobia.com/result?p=css-declarations
 
 [npm]: https://docs.npmjs.com/cli/install
 
