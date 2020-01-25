@@ -41,7 +41,10 @@ test('css-declarations', function(t) {
 
     st.test('warnings', function(sst) {
       var index = -1
-      var matrix = [["missing '}'", 0], ["missing '{'", 10]]
+      var matrix = [
+        ["missing '}'", 0],
+        ["missing '{'", 10]
+      ]
 
       sst.plan(7)
 
