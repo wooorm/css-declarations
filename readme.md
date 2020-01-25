@@ -5,20 +5,19 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-Parse and stringify CSS declarations (such as the HTML `style`
-attribute).
+Parse and stringify CSS declarations (such as the HTML `style` attribute).
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install css-declarations
 ```
 
-## Usage
+## Use
 
-```javascript
+```js
 var cssDeclarations = require('css-declarations')
 
 var values = cssDeclarations.parse(`
@@ -48,15 +47,16 @@ Parse CSS declarations from `string` to `object`.
 
 ### `cssDeclarations.stringify(values)`
 
-Compile CSS declarations from `object` to `string`.
+Serialize CSS declarations from `object` to `string`.
 
 ###### Returns
 
-`string` — Stringified declarations.
+`string` — Serialized declarations.
 
 ### `function warning(reason, offset)`
 
-Invoked when an error occurs.  Errors come from [`reworkcss/css`][css].
+Invoked when an error occurs.
+Errors come from [`reworkcss/css`][css].
 
 ###### Parameters
 
