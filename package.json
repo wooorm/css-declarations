@@ -27,9 +27,9 @@
     "index.js"
   ],
   "dependencies": {
-    "css": "^2.2.1",
+    "css": "^3.0.0",
     "vendors": "^1.0.0",
-    "vfile-location": "^2.0.0"
+    "vfile-location": "^3.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
