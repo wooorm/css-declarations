@@ -110,7 +110,7 @@ function toJavaScriptName(cssName) {
 
 // Transform `javaScriptName` to `cssName`.
 function toCSSName(javaScriptName) {
-  var cssName = param(javaScriptName)
+  var cssName = parameter(javaScriptName)
   var pos = cssName.indexOf(dash)
   var subvalue = pos === -1 ? null : cssName.slice(0, pos)
 
@@ -121,15 +121,15 @@ function toCSSName(javaScriptName) {
   return cssName
 }
 
-function camel(val) {
-  return val.replace(breakRe, replacer)
+function camel(value) {
+  return value.replace(breakRe, replacer)
   function replacer($0) {
     return $0.charAt(1).toUpperCase()
   }
 }
 
-function param(val) {
-  return val.replace(uppercaseRe, replacer)
+function parameter(value) {
+  return value.replace(uppercaseRe, replacer)
   function replacer($0) {
     return dash + $0.toLowerCase()
   }

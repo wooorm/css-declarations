@@ -3,10 +3,10 @@
 var test = require('tape')
 var cssDeclarations = require('.')
 
-test('css-declarations', function(t) {
+test('css-declarations', function (t) {
   t.equal(typeof cssDeclarations, 'object', 'should be an `object`')
 
-  t.test('.parse()', function(st) {
+  t.test('.parse()', function (st) {
     st.equal(typeof cssDeclarations.parse, 'function', 'should be a method')
 
     st.deepEqual(
@@ -39,7 +39,7 @@ test('css-declarations', function(t) {
       'should ignore comments correctly'
     )
 
-    st.test('warnings', function(sst) {
+    st.test('warnings', function (sst) {
       var index = -1
       var matrix = [
         ["missing '}'", 0],
@@ -67,7 +67,7 @@ test('css-declarations', function(t) {
     st.end()
   })
 
-  t.test('.stringify()', function(st) {
+  t.test('.stringify()', function (st) {
     st.equal(typeof cssDeclarations.stringify, 'function', 'should be a method')
 
     st.deepEqual(
