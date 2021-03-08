@@ -1,5 +1,2 @@
 coverage/
-css-declarations.js
-css-declarations.min.js
-*.json
 *.md

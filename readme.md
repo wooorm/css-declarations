@@ -9,6 +9,9 @@ Parse and stringify CSS declarations (such as the HTML `style` attribute).
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -18,34 +21,37 @@ npm install css-declarations
 ## Use
 
 ```js
-var cssDeclarations = require('css-declarations')
+import {parse, stringify} from 'css-declarations'
 
-var values = cssDeclarations.parse(`
+var values = parse(`
   color:/*red*/purple;
   -webkit-border-radius: 3px !important;;
 `)
 // => {color: 'purple', webkitBorderRadius: '3px !important'}
 
-cssDeclarations.stringify(values)
+stringify(values)
 // => 'color: purple; -webkit-border-radius: 3px !important;'
 ```
 
 ## API
 
-### `cssDeclarations.parse(value[, options])`
+This package exports the following identifiers: `parse`, `stringify`.
+There is no default export.
+
+### `parse(value[, options])`
 
 Parse CSS declarations from `string` to `object`.
 
-###### `options`
+###### `options.warning`
 
-*   `warning` ([`Function`][warning])
-    — When given, `warning` is invoked when an error is encountered.
+When given, `warning` is called when an error is encountered
+([`Function`][warning]).
 
 ###### Returns
 
 `Object.<string>` — Declarations.
 
-### `cssDeclarations.stringify(values)`
+### `stringify(values)`
 
 Serialize CSS declarations from `object` to `string`.
 

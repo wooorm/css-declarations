@@ -1,40 +1,36 @@
-'use strict'
-
-var test = require('tape')
-var cssDeclarations = require('.')
+import test from 'tape'
+import {parse, stringify} from './index.js'
 
 test('css-declarations', function (t) {
-  t.equal(typeof cssDeclarations, 'object', 'should be an `object`')
-
   t.test('.parse()', function (st) {
-    st.equal(typeof cssDeclarations.parse, 'function', 'should be a method')
+    st.equal(typeof parse, 'function', 'should be a method')
 
     st.deepEqual(
-      cssDeclarations.parse(),
+      parse(),
       {},
       'should return an empty object for an empty value'
     )
 
     st.deepEqual(
-      cssDeclarations.parse('\n\t\t '),
+      parse('\n\t\t '),
       {},
       'should return an empty object for white-space'
     )
 
     st.deepEqual(
-      cssDeclarations.parse('color: red; font-weight: bolder'),
+      parse('color: red; font-weight: bolder'),
       {color: 'red', fontWeight: 'bolder'},
       'should work'
     )
 
     st.deepEqual(
-      cssDeclarations.parse('-webkit-border-radius: 3px'),
+      parse('-webkit-border-radius: 3px'),
       {webkitBorderRadius: '3px'},
       'should capitalise prefixes correctly'
     )
 
     st.deepEqual(
-      cssDeclarations.parse('/*background-*/color: /*purple*/red'),
+      parse('/*background-*/color: /*purple*/red'),
       {color: 'red'},
       'should ignore comments correctly'
     )
@@ -58,7 +54,7 @@ test('css-declarations', function (t) {
       }
 
       sst.deepEqual(
-        cssDeclarations.parse('!important', {warning: warning}),
+        parse('!important', {warning}),
         {},
         'should ignore invalid declarations'
       )
@@ -68,34 +64,34 @@ test('css-declarations', function (t) {
   })
 
   t.test('.stringify()', function (st) {
-    st.equal(typeof cssDeclarations.stringify, 'function', 'should be a method')
+    st.equal(typeof stringify, 'function', 'should be a method')
 
     st.deepEqual(
-      cssDeclarations.stringify({}),
+      stringify({}),
       '',
       'should return an empty string for an empty object'
     )
 
     st.deepEqual(
-      cssDeclarations.stringify({color: null, borderColor: undefined}),
+      stringify({color: null, borderColor: undefined}),
       '',
       'should ignore `null` and `undefined` values'
     )
 
     st.deepEqual(
-      cssDeclarations.stringify({color: ''}),
+      stringify({color: ''}),
       'color: ;',
       'should return an empty declaration for empty strings'
     )
 
     st.deepEqual(
-      cssDeclarations.stringify({color: 'red', backgroundColor: 'blue'}),
+      stringify({color: 'red', backgroundColor: 'blue'}),
       'color: red; background-color: blue;',
       'should work'
     )
 
     st.deepEqual(
-      cssDeclarations.stringify({webkitBorderRadius: '3px !important'}),
+      stringify({webkitBorderRadius: '3px !important'}),
       '-webkit-border-radius: 3px !important;',
       'should support prefixes'
     )

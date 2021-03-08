@@ -1,14 +1,9 @@
-'use strict'
-
-var css = require('css')
-var locations = require('vfile-location')
-var vendors = require('vendors')
-
-exports.parse = parse
-exports.stringify = stringify
+import css from 'css'
+import locations from 'vfile-location'
+import {vendors} from 'vendors'
 
 // Parse CSS declarations to an object.
-function parse(value, options) {
+export function parse(value, options) {
   var source = String(value || '')
   var rule = 'i{' + source + '}'
   var location = locations(rule)
@@ -44,7 +39,7 @@ function parse(value, options) {
 }
 
 // Serialize a declarations object to string.
-function stringify(values) {
+export function stringify(values) {
   var results = []
   var result
   var key
