@@ -2,12 +2,24 @@ import css from 'css'
 import locations from 'vfile-location'
 import {vendors} from 'vendors'
 
-// Parse CSS declarations to an object.
+/**
+ * @typedef CssDeclarationsOptions
+ * @property {(reason: string, offset: number) => void} [warning] Function called on errors
+ */
+
+/**
+ * Parse CSS declarations to an object.
+ *
+ * @param {string} [value]
+ * @param {CssDeclarationsOptions} [options]
+ * @returns {Record.<string, string>} Declarations
+ */
 export function parse(value, options) {
   var source = String(value || '')
   var rule = 'i{' + source + '}'
   var location = locations(rule)
   var sheet = css.parse(rule, {silent: true}).stylesheet
+  // @ts-ignore to loose `css` types.
   var results = sheet.rules[0].declarations || []
   var index = -1
   var declarations = {}
@@ -15,7 +27,9 @@ export function parse(value, options) {
 
   while (++index < results.length) {
     if (results[index].type === 'declaration') {
-      declarations[toJsName(results[index].property)] = results[index].value
+      declarations[toJsName(results[index].property)] = String(
+        results[index].value
+      )
     }
   }
 
@@ -35,18 +49,24 @@ export function parse(value, options) {
     }
   }
 
+  // @ts-ignore to loose `css` types.
   return declarations
 }
 
-// Serialize a declarations object to string.
-export function stringify(values) {
+/**
+ * Serialize declarations.
+ *
+ * @param {Record.<string, string>} declarations
+ * @returns {string}
+ */
+export function stringify(declarations) {
   var results = []
   var result
   var key
 
-  for (key in values) {
-    if (values[key] !== null && values[key] !== undefined) {
-      results.push([toCssName(key), values[key]].join(': '))
+  for (key in declarations) {
+    if (declarations[key] !== null && declarations[key] !== undefined) {
+      results.push([toCssName(key), declarations[key]].join(': '))
     }
   }
 

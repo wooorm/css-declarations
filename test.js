@@ -35,6 +35,14 @@ test('css-declarations', function (t) {
       'should ignore comments correctly'
     )
 
+    st.deepEqual(parse('/* comment */'), {}, 'should ignore just a comment')
+
+    st.deepEqual(
+      parse('@media (min-width: 1) { a { b: c} } '),
+      {},
+      'should ignore an at rule'
+    )
+
     st.test('warnings', function (sst) {
       var index = -1
       var matrix = [
