@@ -69,9 +69,9 @@ Errors come from [`reworkcss/css`][css].
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/css-declarations.svg
+[build-badge]: https://github.com/wooorm/css-declarations/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/css-declarations
+[build]: https://github.com/wooorm/css-declarations/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/css-declarations.svg
 
