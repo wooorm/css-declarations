@@ -7,132 +7,90 @@ var vendors = require('vendors')
 exports.parse = parse
 exports.stringify = stringify
 
-// Characters.
-var space = ' '
-var dash = '-'
-var colon = ':'
-var semicolon = ';'
-var underscore = '_'
-var lowercaseI = 'i'
-var leftCurlyBrace = '{'
-var rightCurlyBrace = '}'
-
-// Expressions.
-var uppercaseRe = /[A-Z]/g
-var breakRe = /-./g
-
-// Suffix to wrap around declarations.
-var declarationsPrefix = lowercaseI + leftCurlyBrace
-var declarationsSuffix = rightCurlyBrace
-
-// Configuration for `reworkcss/css`.
-var cssOption = {silent: true}
-
 // Parse CSS declarations to an object.
 function parse(value, options) {
-  var input = String(value || '')
-  var max = input.length
+  var source = String(value || '')
+  var rule = 'i{' + source + '}'
+  var location = locations(rule)
+  var sheet = css.parse(rule, {silent: true}).stylesheet
+  var results = sheet.rules[0].declarations || []
+  var index = -1
   var declarations = {}
-  var settings = options || {}
-  var warn = settings.warning
-  var location
-  var sheet
-  var results
-  var warnings
-  var length
-  var index
-  var result
-  var warning
   var offset
 
-  input = declarationsPrefix + input + declarationsSuffix
-  location = locations(input)
-
-  sheet = css.parse(input, cssOption).stylesheet
-  results = sheet.rules[0].declarations || []
-  warnings = sheet.parsingErrors
-
-  index = -1
-  length = results.length
-
-  while (++index < length) {
-    result = results[index]
-
-    if (result.type === 'declaration') {
-      declarations[toJavaScriptName(result.property)] = result.value
+  while (++index < results.length) {
+    if (results[index].type === 'declaration') {
+      declarations[toJsName(results[index].property)] = results[index].value
     }
   }
 
-  if (warn) {
+  if (options && options.warning) {
     index = -1
-    length = warnings.length
 
-    while (++index < length) {
-      warning = warnings[index]
+    while (++index < sheet.parsingErrors.length) {
       offset = Math.min(
-        max,
+        source.length,
         location.toOffset({
-          line: warning.line,
-          column: warning.column
-        }) - declarationsPrefix.length
+          line: sheet.parsingErrors[index].line,
+          column: sheet.parsingErrors[index].column
+        }) - 2 // `'i{'.length`
       )
 
-      warn(warning.reason, offset)
+      options.warning(sheet.parsingErrors[index].reason, offset)
     }
   }
 
   return declarations
 }
 
-// Compile a declarations object to string.
+// Serialize a declarations object to string.
 function stringify(values) {
   var results = []
+  var result
   var key
-  var value
 
   for (key in values) {
-    value = values[key]
-
-    if (value !== null && value !== undefined) {
-      results.push([toCSSName(key), value].join(colon + space))
+    if (values[key] !== null && values[key] !== undefined) {
+      results.push([toCssName(key), values[key]].join(': '))
     }
   }
 
-  value = results.join(semicolon + space)
-
-  return value ? value + semicolon : ''
+  result = results.join('; ')
+  return result ? result + ';' : ''
 }
 
-// Transform `cssName` to `javaScriptName`.
-function toJavaScriptName(cssName) {
-  var char = cssName.charAt(0)
-
-  return camel(cssName.slice(char === dash || char === underscore ? 1 : 0))
+// Transform `cssName` to `jsName`.
+function toJsName(cssName) {
+  var head = cssName.charCodeAt(0)
+  return camel(
+    head === 45 /* `-` */ || head === 95 /* `_` */ ? cssName.slice(1) : cssName
+  )
 }
 
-// Transform `javaScriptName` to `cssName`.
-function toCSSName(javaScriptName) {
-  var cssName = parameter(javaScriptName)
-  var pos = cssName.indexOf(dash)
-  var subvalue = pos === -1 ? null : cssName.slice(0, pos)
+// Transform `jsName` to `cssName`.
+function toCssName(jsName) {
+  var cssName = parameter(jsName)
+  var index = cssName.indexOf('-')
+  var subvalue
 
-  if (subvalue && vendors.indexOf(subvalue) !== -1) {
-    cssName = dash + cssName
+  if (index > -1) {
+    subvalue = cssName.slice(0, index)
+    if (vendors.indexOf(subvalue) > -1) cssName = '-' + cssName
   }
 
   return cssName
 }
 
 function camel(value) {
-  return value.replace(breakRe, replacer)
+  return value.replace(/-./g, replacer)
   function replacer($0) {
     return $0.charAt(1).toUpperCase()
   }
 }
 
 function parameter(value) {
-  return value.replace(uppercaseRe, replacer)
+  return value.replace(/[A-Z]/g, replacer)
   function replacer($0) {
-    return dash + $0.toLowerCase()
+    return '-' + $0.toLowerCase()
   }
 }
