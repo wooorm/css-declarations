@@ -63,20 +63,22 @@ function parse(value, options) {
     }
   }
 
-  index = -1
-  length = warn && warnings.length
+  if (warn) {
+    index = -1
+    length = warnings.length
 
-  while (++index < length) {
-    warning = warnings[index]
-    offset = Math.min(
-      max,
-      location.toOffset({
-        line: warning.line,
-        column: warning.column
-      }) - declarationsPrefix.length
-    )
+    while (++index < length) {
+      warning = warnings[index]
+      offset = Math.min(
+        max,
+        location.toOffset({
+          line: warning.line,
+          column: warning.column
+        }) - declarationsPrefix.length
+      )
 
-    warn(warning.reason, offset)
+      warn(warning.reason, offset)
+    }
   }
 
   return declarations
