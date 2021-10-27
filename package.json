@@ -1,6 +1,6 @@
 {
   "name": "css-declarations",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Legacy utility to parse and stringify CSS declarations",
   "license": "MIT",
   "keywords": [],
